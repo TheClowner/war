@@ -14,7 +14,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.Sign;
+import org.bukkit.block.data.type.Sign;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -327,12 +327,12 @@ public class Team {
 								this.getTeamConfig().resolveInt(
 										TeamConfig.LIFEPOOL)).split("\n");
 			}
-			signBlock.setType(Material.SIGN);
+			signBlock.setType(Material.OAK_SIGN);
 			org.bukkit.block.Sign block = (org.bukkit.block.Sign) signBlock
 					.getState();
-			org.bukkit.material.Sign data = (Sign) block.getData();
-			data.setFacingDirection(signDirection);
-			block.setData(data);
+			Sign data = (Sign) block.getBlockData();
+			data.setRotation(signDirection);
+			block.setBlockData(data);
 			for (int i = 0; i < 4; i++) {
 				block.setLine(i, lines[i]);
 			}

@@ -1,8 +1,8 @@
 name: ${project.name}
 version: ${project.version}
-api-version: 1.13
+api-version: 1.15
 description: ${project.description}
-author: tommytony
+authors: [tommytony,TheClowner]
 website: ${project.url}
 main: com.tommytony.war.War
 softdepend: [WorldEdit, Vault]

@@ -12,7 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
-import org.bukkit.material.Sign;
+import org.bukkit.block.data.type.Sign;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -213,15 +213,15 @@ public class WarHub {
 			}
 
 			// War hub sign
-			locationBlock.getRelative(front, 2).setType(Material.SIGN);
+			locationBlock.getRelative(front, 2).setType(Material.OAK_SIGN);
 			String[] lines = War.war.getString("sign.warhub").split("\n");
 			org.bukkit.block.Sign locationBlockFront = (org.bukkit.block.Sign) locationBlock.getRelative(front, 2).getState();
 			for (int i = 0; i < 4; i++) {
 				locationBlockFront.setLine(i, lines[i]);
 			}
-			org.bukkit.material.Sign sign = (Sign) locationBlockFront.getData();
-			sign.setFacingDirection(orientation.getOppositeFace());
-			locationBlockFront.setData(sign);
+			org.bukkit.block.data.type.Sign signData = (org.bukkit.block.data.type.Sign) locationBlockFront.getBlockData();
+			signData.setRotation(orientation.getOppositeFace());
+			locationBlockFront.setBlockData(signData);
 			locationBlockFront.update(true);
 			// Warzone signs
 			for (Warzone zone : War.war.getWarzones()) {
@@ -256,11 +256,11 @@ public class WarHub {
 
 		Block zoneGate = this.zoneGateBlocks.get(zone.getName());
 		if (zoneGate != null) {
-			zoneGate.getRelative(BlockFace.UP, 2).getRelative(back, 1).setType(Material.WALL_SIGN);
+			zoneGate.getRelative(BlockFace.UP, 2).getRelative(back, 1).setType(Material.OAK_WALL_SIGN);
 			org.bukkit.block.Sign block = (org.bukkit.block.Sign) zoneGate.getRelative(BlockFace.UP, 2).getRelative(back, 1).getState();
-			org.bukkit.material.Sign data = (Sign) block.getData();
-			data.setFacingDirection(this.getOrientation().getOppositeFace());
-			block.setData(data);
+			Sign data = (Sign) block.getBlockData();
+			data.setRotation(this.getOrientation().getOppositeFace());
+			block.setBlockData(data);
 			int zoneCap = 0;
 			int zonePlayers = 0;
 			for (Team t : zone.getTeams()) {
