@@ -50,6 +50,6 @@ public class WarAdminUI extends ChestUI {
 
 	@Override
 	public int getSize() {
-		return 9 * 7;
+		return 9 * 6;
 	}
 }
